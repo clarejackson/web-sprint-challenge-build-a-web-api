@@ -14,8 +14,8 @@ const projects = require('./projects-model')
 
 router.get('/', (req, res, next) => {
   projects.get()
-  .then((posts) => {
-    res.status(200).json(posts)
+  .then((project) => {
+    res.status(200).json(project)
   })
   .catch(next)
 });

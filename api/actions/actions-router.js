@@ -7,16 +7,22 @@
 
 const express = require('express');
 
+const { validateActionId } = require('../middleware/middleware')
+
 const router = express.Router();
 
 const actions = require('./actions-model')
 
 router.get('/', (req, res, next) => {
   actions.get()
-  .then((posts) => {
-    res.status(200).json(posts)
+  .then((action) => {
+    res.status(200).json(action)
   })
   .catch(next)
+});
+
+router.get('/:id', validateActionId(), (req, res) => {
+  res.json(req.action)
 });
 
 module.exports = router
