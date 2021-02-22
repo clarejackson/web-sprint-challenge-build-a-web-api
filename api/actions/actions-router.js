@@ -7,7 +7,7 @@
 
 const express = require('express');
 
-const { validateActionId } = require('../middleware/middleware')
+const { validateActionId, validateAction } = require('../middleware/middleware')
 
 const router = express.Router();
 
@@ -23,6 +23,32 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', validateActionId(), (req, res) => {
   res.json(req.action)
+});
+
+router.post('/', validateAction(), (req, res, next) => {
+  actions.insert(req.body)
+  .then((action) => {
+    res.status(201).json(action)
+  })
+  .catch(next)
+});
+
+router.put('/:id', validateActionId(), validateAction(), (req, res, next) => {
+  actions.update(req.params.id, req.body)
+  .then((action) => {
+    res.status(200).json(action)
+  })
+  .catch(next)
+});
+
+router.delete('/:id', validateActionId(), (req, res, next) => {
+  actions.remove(req.params.id)
+  .then((action) => {
+    if (action) {
+      res.status(200).json()
+    }
+  })
+  .catch(next)
 });
 
 

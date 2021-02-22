@@ -42,4 +42,24 @@ router.put('/:id', validateProjectId(), validateProject(), (req, res, next) => {
   .catch(next)
 });
 
+router.delete('/:id', validateProjectId(), (req, res, next) => {
+  projects.remove(req.params.id)
+  .then((project) => {
+    if (project) {
+      res.status(200).json()
+    }
+  })
+  .catch(next)
+});
+
+router.get('/:id/actions', validateProjectId(), (req, res, next) => {
+  // RETURN THE ARRAY OF USER POSTS
+  // this needs a middleware to verify user id
+  projects.getProjectActions(req.params.id)
+  .then((actions) => {
+    res.status(200).json(actions)
+  })
+  .catch(next)
+});
+
 module.exports = router

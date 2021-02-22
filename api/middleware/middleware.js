@@ -7,7 +7,6 @@ const actions = require('../actions/actions-model')
 const projects = require('../projects/projects-model')
 
 function validateActionId() {
-  // DO YOUR MAGIC
   return (req, res, next) => {
     actions.get(req.params.id)
     .then((action) => {
@@ -24,7 +23,6 @@ function validateActionId() {
 }
 
 function validateProjectId() {
-  // DO YOUR MAGIC
   return (req, res, next) => {
     projects.get(req.params.id)
     .then((project) => {
@@ -41,7 +39,6 @@ function validateProjectId() {
 }
 
 function validateProject() {
-  // DO YOUR MAGIC
   return (req, res, next) => {
     if (!req.body) {
       return res.status(400).json({
@@ -57,10 +54,32 @@ function validateProject() {
   }
 }
 
+function validateAction() {
+  return (req, res, next) => {
+    if (!req.body) {
+      return res.status(400).json({
+        message: "missing action data"
+      })
+    }
+    if (!req.body.project_id) {
+      return res.status(400).json({
+        message: "missing project_id"
+      })
+    }
+    if(!req.body.description || !req.body.notes) {
+      return res.status(400).json({
+        message: "missing input fields"
+      })
+    }
+    next()
+  }
+}
+
 
 module.exports = {
   validateActionId,
   validateProjectId,
   validateProject,
-  
+  validateAction,
+
 }
