@@ -8,6 +8,8 @@
 
 const express = require('express');
 
+const { validateProjectId } = require('../middleware/middleware')
+
 const router = express.Router();
 
 const projects = require('./projects-model')
@@ -18,6 +20,10 @@ router.get('/', (req, res, next) => {
     res.status(200).json(project)
   })
   .catch(next)
+});
+
+router.get('/:id', validateProjectId(), (req, res) => {
+  res.json(req.project)
 });
 
 module.exports = router

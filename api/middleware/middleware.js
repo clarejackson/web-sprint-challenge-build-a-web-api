@@ -20,12 +20,29 @@ function validateActionId() {
         })
       }
     })
-    .catch(next)
+  }
+}
+
+function validateProjectId() {
+  // DO YOUR MAGIC
+  return (req, res, next) => {
+    projects.get(req.params.id)
+    .then((project) => {
+      if (project) {
+        req.project = project
+        next()
+      } else {
+        res.status(404).json({
+          message: "project not found",
+        })
+      }
+    })
   }
 }
 
 
 module.exports = {
   validateActionId,
-  
+  validateProjectId,
+
 }
