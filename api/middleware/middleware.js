@@ -40,9 +40,27 @@ function validateProjectId() {
   }
 }
 
+function validateProject() {
+  // DO YOUR MAGIC
+  return (req, res, next) => {
+    if (!req.body) {
+      return res.status(400).json({
+        message: "missing project data"
+      })
+    } 
+    if (!req.body.name || !req.body.description) {
+      return res.status(400).json({
+        message: "missing required field"
+      })
+    }
+    next()
+  }
+}
+
 
 module.exports = {
   validateActionId,
   validateProjectId,
-
+  validateProject,
+  
 }

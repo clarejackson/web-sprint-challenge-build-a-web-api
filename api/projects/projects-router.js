@@ -8,7 +8,7 @@
 
 const express = require('express');
 
-const { validateProjectId } = require('../middleware/middleware')
+const { validateProjectId, validateProject } = require('../middleware/middleware')
 
 const router = express.Router();
 
@@ -24,6 +24,22 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', validateProjectId(), (req, res) => {
   res.json(req.project)
+});
+
+router.post('/', validateProject(), (req, res, next) => {
+  projects.insert(req.body)
+  .then((project) => {
+    res.status(201).json(project)
+  })
+  .catch(next)
+});
+
+router.put('/:id', validateProjectId(), validateProject(), (req, res, next) => {
+  projects.update(req.params.id, req.body)
+  .then((project) => {
+    res.status(200).json(project)
+  })
+  .catch(next)
 });
 
 module.exports = router
