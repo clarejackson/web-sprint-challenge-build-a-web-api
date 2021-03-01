@@ -139,7 +139,22 @@ After finishing your required elements, you can push your work further. These go
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+Node.js lets developers use Javascript outside of the browser, and this allows the same language to be used for both the client and server side. Other core features are that it is single-threaded, asynchronous, and there is an npm repository with access to so many libraries in the form of npm modules.
+Express has lots of features: simple, unopinionated, extensible, light-weight, comparable with connect middleware, packaged into easy-to-use api, abstracts away common tasks using its intuitive nature. It can be used to build entire web applications, serve SPA’s, build RESTful web services that work with JSON, serve static content, like HTML files, images, audio files, PDFs, and more, and finally, power real-time applications using technologies like Web Sockets or WebRTC. 
+
 1. Understand and explain the use of Middleware.
+
+Middleware is shared code that adds additional functionality to our Express applications. The code runs through several different functions (in the order we apply them) and we can return different results based on different conditionals. For example, a middleware may be set up to validate an entry and if it doesn't meet the requirements it will return the error code with the reason to the client side, then continues on. If it does meet the requirements, it's passed on to the next middleware/function in the line.
+
 1. The basic principles of the REST architectural style.
+
+Client-server archetecture, stateless architecture with each request standing on its own, cacheable for storing and faster retrieval of data, layered system, code on demand meaning the api can return the resource requested and the code to act on it and uniform interfaces are easier for the user to choose how they interact without confusing the api.
+
 1. Understand and explain the use of Express Routers.
+
+Routing is one of Espress’s main features; it is a way to map the incoming request to servers from the client to the request handling function based off of the url and type of http method used. The use of routers helps us to keep our code clean and a place to define the CRUD operations within our server-side application.
+
 1. Describe tooling used to manually test the correctness of an API.
+
+A REST client like Insomnia or Postman can be used to manually test our API as a client will use it. It can be used to create a CRUD operation request that would be using the endpoints from the server side to test the successful and error responses.
